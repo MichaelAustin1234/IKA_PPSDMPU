@@ -1,0 +1,190 @@
+ika,kode,nama,tipe_input,bobot,min,max,max_dinamis,cap_100,catatan,baris_excel
+,,Meningkatkan kualitas pendidikan dan pelatihan SDM transportasi udara,ANGKA,,,,,,,4
+IKA.01,,Indeks Kompetensi SDM Transportasi Udara,AGREGAT,,,,,,,5
+IKA.01,A,Tingkat Kelulusan,AGREGAT,0.2,0,100,,YA,,6
+IKA.01,A.1,Persentase Lulusan Tepat Waktu,FORMULA_RASIO,0.6,0,100,,YA,,7
+IKA.01,A.2,"Persentase Lulusan dengan IPK >= 3,0",FORMULA_RASIO,0.4,80,100,,YA,,8
+IKA.01,,Jumlah Lulusan,ANGKA,,,,,,,9
+IKA.01,,Jumlah Lulusan Tepat Waktu,ANGKA,,,,,,,10
+IKA.01,,"Jumlah Lulusan dengan IPK >= 3,5 - 4,0",ANGKA,,,,,,,11
+IKA.01,,"Jumlah Lulusan dengan IPK >= 3,0 dan IPK < 3,5",ANGKA,,,,,,,12
+IKA.01,,"Jumlah Lulusan dengan IPK >= 2,75 dan IPK < 3",ANGKA,,,,,,,13
+IKA.01,,"Jumlah Lulusan dengan IPK <2,75",ANGKA,,,,,,,14
+IKA.01,B,Tingkat Pencapaian Sertifikasi Kompetensi,ANGKA,0.2,0,100,,YA,"Nilai diinput manual, bukan hasil hitung B.1/B.2 — perlu konfirmasi stakeholder",15
+IKA.01,B.1,Tingkat Lulusan Pendidikan dengan Sertifikasi Kompetensi,AGREGAT,0.3,0,100,,YA,,16
+IKA.01,B.1.1,Persentase Lulusan Pendidikan Tersertifikasi Kompetensi Nasional,FORMULA_RASIO,0.8,0,95,,YA,,17
+IKA.01,B.1.2,Persentase Lulusan Pendidikan Tersertifikasi Kompetensi Internasional,FORMULA_RASIO,0.2,0,5,,YA,,18
+IKA.01,,Jumlah lulusan pendidikan yang memiliki sertifikat kompetensi berstandar nasional,ANGKA,,,,,,,19
+IKA.01,,Jumlah lulusan pendidikan yang memiliki sertifikat kompetensi berstandar internasional (Approval Internasional),ANGKA,,,,,,,20
+IKA.01,B.2,Tingkat Lulusan Pelatihan dengan Sertifikasi Kompetensi,AGREGAT,0.7,0,100,,YA,,21
+IKA.01,B.2.1,Persentase Lulusan Pelatihan Teknis Tersertifikasi Nasional,FORMULA_RASIO,0.2,0,20,,YA,,22
+IKA.01,B.2.2,Persentase Lulusan Pelatihan Teknis Tersertifikasi Internasional,FORMULA_RASIO,0.1,0,10,,YA,,23
+IKA.01,B.2.3,Persentase Lulusan Pelatihan Teknis,FORMULA_RASIO,0.7,0,70,,YA,,24
+IKA.01,,Jumlah Peserta Pelatihan,ANGKA,,,,,,,25
+IKA.01,,Jumlah Lulusan Pelatihan Teknis Tersertifikasi Nasional (BNSP / DJU),ANGKA,,,,,,,26
+IKA.01,,Jumlah Lulusan Pelatihan Teknis Tersertifikasi Internasional,ANGKA,,,,,,,27
+IKA.01,,Jumlah Lulusan Pelatihan Teknis Non-Sertifikasi,ANGKA,,,,,,,28
+IKA.01,C,Tingkat Penyerapan Lulusan,AGREGAT,0.3,0,100,,YA,"Jika C.1 (baris 30) sudah >=100, maka C langsung dikunci = 100",29
+IKA.01,C.1,"Jumlah Lulusan Bekerja <= 6 bulan 
+ (75% lulusan terserap di industri dalam 6 bulan setelah tanggal lulus)",ANGKA,0.8,0,"=ROUND($C$35*75%,0)",YA,YA,Batas Max dinamis: persentase x total lulusan s.d. tahun t (baris 35),30
+IKA.01,C.2,"Jumlah Lulusan Bekerja > 6 bulan s.d 12 bulan 
+ (20% lulusan terserap di industri >6 s.d 12 bulan setelah tanggal lulus)",ANGKA,=0.8*0.2,0,"=ROUND($C$35*20%,0)",YA,YA,Batas Max dinamis: persentase x total lulusan s.d. tahun t (baris 35),31
+IKA.01,C.3,"Jumlah Lulusan Bekerja >12 bulan s.d 18 bulan 
+ (3% lulusan terserap di industri >6 s.d 12 bulan setelah tanggal lulus)",ANGKA,=0.12*0.2,0,"=ROUND($C$35*3%,0)",YA,YA,Batas Max dinamis: persentase x total lulusan s.d. tahun t (baris 35),32
+IKA.01,C.4,"Jumlah Lulusan Bekerja >18 bulan s.d 24 bulan
+ (2% lulusan terserap di industri >12 s.d 18 bulan setelah tanggal lulus)",ANGKA,=0.08*0.2,0,"=ROUND($C$35*2%,0)",YA,YA,Batas Max dinamis: persentase x total lulusan s.d. tahun t (baris 35),33
+IKA.01,C.5,"Jumlah Lulusan Bekerja >24 atau belum bekerja 
+ 0% lulusan terserap di industri >24 bulan setelah tanggal lulus",ANGKA,,0,100,,YA,,34
+IKA.01,C.6,Jumlah lulusan sampai dengan tahun t,ANGKA,,,,,,,35
+IKA.01,D,Tingkat Kepuasan Pengguna Lulusan,AGREGAT,0.3,0,100,,YA,,36
+IKA.01,D.1,Aspek Kompetensi,ANGKA,0.4,0,4,,YA,,37
+IKA.01,D.2,Aspek Kinerja,ANGKA,0.3,0,4,,YA,,38
+IKA.01,D.3,Aspek Etos Kerja,ANGKA,0.3,0,4,,YA,,39
+IKA.01,,"Meningkatnya Akreditasi Lembaga Pendidikan Vokasi, Sertifikasi Pelatihan dan Tenaga Kerja Sektor Transportasi Udara",ANGKA,,,,,,,40
+IKA.02,,Indeks Akreditasi dan Sertifikasi Lembaga Pendidikan dan Lembaga Pelatihan SDM Transportasi Udara,AGREGAT,,,,,,,41
+IKA.02,A,Tingkat Akreditasi Institusi,AGREGAT,0.3,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi >=3, hasil jadi FALSE/0 (lihat Catatan Kritis)",42
+IKA.02,A.1,PPI Curug,PREDIKAT,=1/7,,,,,,43
+IKA.02,A.2,Poltekbang Surabaya,PREDIKAT,=1/7,,,,,,44
+IKA.02,A.3,Poltekbang Medan,PREDIKAT,=1/7,,,,,,45
+IKA.02,A.4,Poltekbang Makassar,PREDIKAT,=1/7,,,,,,46
+IKA.02,A.5,Poltekbang Palembang,PREDIKAT,=1/7,,,,,,47
+IKA.02,A.6,Poltekbang Jayapura,PREDIKAT,=1/7,,,,,,48
+IKA.02,A.7,API Banyuwangi,PREDIKAT,=1/7,,,,,,49
+IKA.02,B,Tingkat Akreditasi Program Studi,AGREGAT,0.3,0,100,,,,50
+IKA.02,B.1,PPI Curug,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",51
+IKA.02,B.1.1,D-III Teknik Mekanikal Bandara,PREDIKAT,,,,,,,52
+IKA.02,B.1.2,D-III Teknik Bangunan dan Landasan,PREDIKAT,,,,,,,53
+IKA.02,B.1.3,D-III Penerangan Aeronautika,PREDIKAT,,,,,,,54
+IKA.02,B.1.4,D-III Pertolongan Kecelakaan Pesawat,PREDIKAT,,,,,,,55
+IKA.02,B.1.5,D-III Operasi Bandar Udara,PREDIKAT,,,,,,,56
+IKA.02,B.1.6,D-IV Lalu Lintas Udara,PREDIKAT,,,,,,,57
+IKA.02,B.1.7,D-IV Penerbang,PREDIKAT,,,,,,,58
+IKA.02,B.1.8,D-IV Teknik Listrik Bandara,PREDIKAT,,,,,,,59
+IKA.02,B.1.9,D-IV Teknik Pesawat Udara,PREDIKAT,,,,,,,60
+IKA.02,B.1.10,D-IV Teknik Navigasi Udara,PREDIKAT,,,,,,,61
+IKA.02,B.2,Poltekbang Surabaya,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",62
+IKA.02,B.2.1,D-III Komunikasi Penerbangan,PREDIKAT,,,,,,,63
+IKA.02,B.2.2,D-III Lalu Lintas Udara,PREDIKAT,,,,,,,64
+IKA.02,B.2.3,D-III Manajemen Transportasi Udara,PREDIKAT,,,,,,,65
+IKA.02,B.2.4,D-III Teknik Bangunan dan Landasan,PREDIKAT,,,,,,,66
+IKA.02,B.2.5,D-III Teknik Listrik Bandara,PREDIKAT,,,,,,,67
+IKA.02,B.2.6,D-III Teknik Navigasi Udara,PREDIKAT,,,,,,,68
+IKA.02,B.2.7,D-III Teknik Pesawat Udara,PREDIKAT,,,,,,,69
+IKA.02,B.3,Poltekbang Medan,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",70
+IKA.02,B.3.1,D-III Pemanduan Lalu Lintas Udara,PREDIKAT,,,,,,,71
+IKA.02,B.3.2,D-III Teknik Telekomunikasi dan Navigasi Udara,PREDIKAT,,,,,,,72
+IKA.02,B.3.3,D-III Teknik Listrik Bandara,PREDIKAT,,,,,,,73
+IKA.02,B.3.4,D-III Teknologi Pemeliharaan Pesawat Udara,PREDIKAT,,,,,,,74
+IKA.02,B.4,Poltekbang Makassar,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",75
+IKA.02,B.4.1,D-III Manajemen Lalu Lintas Udara,PREDIKAT,,,,,,,76
+IKA.02,B.4.2,D-III Teknologi Navigasi Udara,PREDIKAT,,,,,,,77
+IKA.02,B.4.3,D-III Teknologi Bandar Udara,PREDIKAT,,,,,,,78
+IKA.02,B.4.4,D-III Teknologi Pemeliharaan Pesawat Udara,PREDIKAT,,,,,,,79
+IKA.02,B.5,Poltekbang Palembang,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",80
+IKA.02,B.5.1,D-III Manajemen Bandar Udara,PREDIKAT,,,,,,,81
+IKA.02,B.5.2,D-III Penyelamatan dan Pemadam Kebakaran Penerbangan,PREDIKAT,,,,,,,82
+IKA.02,B.5.3,D-IV Teknologi Rekayasa Bandar Udara,PREDIKAT,,,,,,,83
+IKA.02,B.6,Poltekbang Jayapura,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",84
+IKA.02,B.6.1,D-III Manajemen Lalu Lintas Udara,PREDIKAT,,,,,,,85
+IKA.02,B.6.2,D-III Manajemen Bandar Udara,PREDIKAT,,,,,,,86
+IKA.02,B.6.3,D-III Teknik Listrik Bandara,PREDIKAT,,,,,,,87
+IKA.02,B.7,API Banyuwangi,AGREGAT,=1/7,0,4,,,"BUG: IF tanpa ELSE — jika rata-rata akreditasi prodi >=3,5, hasil jadi FALSE/0",88
+IKA.02,B.7.1,D-III Operasi Pesawat Udara,PREDIKAT,,,,,,,89
+IKA.02,B.7.2,D-III Penerbang Sayap Tetap,PREDIKAT,,,,,,,90
+IKA.02,C,Tingkat Sertifikasi Program Pelatihan,FORMULA_RASIO,0.2,0,85,,,,91
+IKA.02,C.1,"Jumlah Program Pelatihan Tersertifikasi (Approval Ditjen Perhubungan Udara / Approval Internasional (ICAO, IATA, EASA, dsb)",ANGKA,,,,,,,92
+IKA.02,C.2,Total Program Pelatihan,ANGKA,,,,,,,93
+IKA.02,D,"Tingkat Sertifikasi Tenaga Kerja (Bobot = 0,30)",FORMULA_RASIO,0.2,0,85,,,"Label tertulis 'Bobot=0,30' tapi bobot aktual di kolom G = 0,2 (salah ketik label di Excel)",94
+IKA.02,D.1,Jumlah Tenaga Kerja Tersertifikasi,AGREGAT,,,,,,,95
+IKA.02,D.1.1,Jumlah Lulusan Pelatihan dengan Status Pekerja (non-alumni),ANGKA,,,,,,,96
+IKA.02,D.1.2,Jumlah Serapan Lulusan Tersertifikasi,ANGKA,,,,,,,97
+IKA.02,D.2,Jumlah Serapan Lulusan dan Peserta Pelatihan Tersertifikasi,AGREGAT,,,,,,,98
+IKA.02,,Terwujudnya Kebijakan Pengembangan SDM yang Menunjang Kebijakan Sektor Transportasi Udara,ANGKA,,,,,,,99
+IKA.03,,Indeks Kebijakan Pengembangan SDM Transportasi Udara,AGREGAT,,,,,,,100
+IKA.03,A,"Tingkat Keselarasan Kebijakan Pengembangan SDM Transportasi Udara (Bobor = 0,3)",FORMULA_RASIO,0.3,0,100,,,,101
+IKA.03,A.1,Jumlah Skor Aspek Kebijakan Pengembangan SDM Transportasi Udara yang selaras dengan Kebijakan Sektor Transportasi Udara,ANGKA,,,,,,,102
+IKA.03,A.2,Jumlah Aspek Kebijakan,ANGKA,,,,,,,103
+IKA.03,B,"Tingkat relevansi kebijakan pengembangan SDM transportasi udara (Bobot = 0,30)",FORMULA_RASIO,0.3,0,100,,,,104
+IKA.03,B.1,Jumlah Skor Aspek Kebijakan Pengembangan SDM Transportasi Udara yang selaras dengan Kebijakan Sektor Transportasi Udara,ANGKA,,,,,,,105
+IKA.03,B.2,Jumlah Aspek Kebijakan,ANGKA,,,,,,,106
+IKA.03,C,"Tingkat efektivitas kebijakan pengembangan SDM transportasi udara (Bobot = 0,30)",AGREGAT,0.3,0,100,,,,107
+IKA.03,C.1,Tingkat Kelulusan,TURUNAN,0.25,0,100,,,,108
+IKA.03,C.2,Tingkat Pencapaian Sertifikasi Kompetensi,TURUNAN,0.25,0,100,,,,109
+IKA.03,C.3,Tingkat Penyerapan Lulusan,TURUNAN,0.25,0,100,,,,110
+IKA.03,C.4,Tingkat Kepuasan Pengguna Lulusan,TURUNAN,0.25,0,100,,,,111
+IKA.03,D,"Tingkat keterlibatan industri dalam perumusan kebijakan pengembangan SDM transportasi udara (Bobot = 0,10)",FORMULA_RASIO,0.1,0,100,,,,112
+IKA.03,D.1,Jumlah Bentuk Keterlibatan Industri/Stakeholder yang terjalin,ANGKA,,,,,,,113
+IKA.03,D.2,Jumlah Bentuk Keterlibatan Industri/Stakeholder yang mungkin terjalin,ANGKA,,,,,,,114
+IKA.03,,"Meningkatnya Kualitas Pelayanan, Pengembangan, Pendidikan dan Pelatihan Transportasi Udara",ANGKA,,,,,,,115
+IKA.04,,Indeks Kualitas Layanan Pendidikan dan Pelatihan SDM Transportasi Udara,AGREGAT,,,,,,,116
+IKA.04,A,Tingkat kepuasan peserta didik terhadap layanan pendidikan dan pelatihan,FORMULA_RASIO,0.25,0,100,,,,117
+IKA.04,A.1,Jumlah Skor Kepuasan Peserta Didik,AGREGAT,,,,,,,118
+IKA.04,A.2,Jumlah Responden,AGREGAT,,,,,,,119
+IKA.04,,Rata-Rata Skor Kepuasan Peserta Didik,ANGKA,,,,,,,120
+IKA.04,,Jumlah Mahasiswa,ANGKA,,,,,,,121
+IKA.04,,Jumlah Peserta Pelatihan,ANGKA,,,,,,,122
+IKA.04,B,Tingkat Sertifikasi Tenaga Pendidik,AGREGAT,0.25,0,100,,,,123
+IKA.04,B.1,Jumlah Dosen dan Instruktur Berkualifikasi,ANGKA,,0,"=ROUND(95%*C126,0)",YA,,Batas Max dinamis: 95%/85% x jumlah dosen/instruktur (baris 126),124
+IKA.04,B.2,Jumlah Dosen dan Instruktur Tersertifikasi,ANGKA,,0,"=ROUND(85%*C126,0)",YA,,Batas Max dinamis: 95%/85% x jumlah dosen/instruktur (baris 126),125
+IKA.04,B.3,Jumlah Dosen/Instruktur,ANGKA,,,,,,,126
+IKA.04,C,Tingkat ketersediaan dan kelayakan sarana dan prasarana pembelajaran,FORMULA_RASIO,0.25,0,100,,,,127
+IKA.04,C.1,Jumlah Sarana dan Prasarana Pembelajaran,AGREGAT,,,,,,,128
+IKA.04,C.1.1,Jumlah Fasilitas Utama,ANGKA,,,,,,,129
+IKA.04,C.1.2,Jumlah Fasilitas Penunjang,ANGKA,,,,,,,130
+IKA.04,C.2,Jumlah Sarana dan Prasarana Pembelajaran yang Layak,AGREGAT,,,,,,,131
+IKA.04,C.2.1,Jumlah Fasilitas Utama,ANGKA,,,,,,,132
+IKA.04,C.2.2,Jumlah Fasilitas Penunjang,ANGKA,,,,,,,133
+IKA.04,D,Persentase penerapan standar mutu di UPT Matra Udara,AGREGAT,0.25,0,100,,,,134
+IKA.04,D.1,Jumlah UPT yang menerapkan standar mutu ISO 9001,ANGKA,,0,9,,,,135
+IKA.04,D.2,Kepatuhan terhadap standar nasional pendidikan dan pelatihan transportasi udara,ANGKA,,0,18,,,,136
+IKA.04,D.3,Pelaksanaan audit internal dan eksternal secara berkala,ANGKA,,0,9,,,,137
+IKA.04,D.4,Efektivitas tindakan perbaikan dan pencegahan (corrective and preventive actions),ANGKA,,0,9,,,,138
+IKA.04,,Terwujudnya Organisasi yang Agile dan SDM Unggul di Bidang Transportasi Udara,ANGKA,,,,,,,139
+IKA.05,,Indeks tata kelola organisasi PPSDMPU,AGREGAT,,,,,,,140
+IKA.05,,Indeks Profesionalsime ASN UPT,ANGKA,,,,,,,141
+IKA.05,,Terwujudnya Birokrasi yang Akuntabel dan Berorientasi pada Layanan Prima,ANGKA,,,,,,,142
+IKA.06,,Indeks Akuntabilitas,AGREGAT,,,,,,,143
+IKA.06,A,Nilai SAKIP UPT,ANGKA,0.25,0,100,,,,144
+IKA.06,B,Nilai Indeks Kinerja Pengelolaan Anggaran UPT,AGREGAT,0.25,0,100,,,,145
+IKA.06,B.1,Kualitas Perencanaan,AGREGAT,0.25,0,25,,,,146
+IKA.06,B.1.1,Revisi DIPA,ANGKA,0.1,0,100,,,,147
+IKA.06,B.1.2,Deviasi Halaman III DIPA,ANGKA,0.15,0,100,,,,148
+IKA.06,B.2,Kualitas Pelaksanaan Anggaran,AGREGAT,0.5,0,50,,,,149
+IKA.06,B.2.1,Penyerapan Anggaran,ANGKA,0.2,0,100,,,,150
+IKA.06,B.2.2,Berlanja Kontraktual,ANGKA,0.1,0,100,,,,151
+IKA.06,B.2.3,Penyelesaian Tagihan,ANGKA,0.1,0,100,,,,152
+IKA.06,B.2.4,Pengelolaan UP dan TUP,ANGKA,0.1,0,100,,,,153
+IKA.06,B.2.5,Dispensasi SPM,ANGKA,,,,,,,154
+IKA.06,B.3,Kualitas Hasil Pelaksanaan Anggaran,AGREGAT,0.25,0,25,,,,155
+IKA.06,B.3.1,Capaian Output,ANGKA,0.25,0,100,,,,156
+IKA.06,C,Nilai Indeks Kearsipan UPT,ANGKA,0.25,0,100,,,,157
+IKA.06,D,Nilai Indeks Maturitas BLU UPT,AGREGAT,0.25,0,5,,,,158
+IKA.06,D.1,Aspek Keuangan,AGREGAT,=5%*20%,0,5,,,,159
+IKA.06,D.1.1,Likuiditas,ANGKA,0.0125,0,5,,,,160
+IKA.06,D.1.2,Efisiensi,ANGKA,0.0125,0,5,,,,161
+IKA.06,D.1.3,Efektifitas,ANGKA,0.0125,0,5,,,,162
+IKA.06,D.1.4,Tingkat Kemandirian,ANGKA,0.0125,0,5,,,,163
+IKA.06,D.2,Aspek Pelayanan / Operasional,AGREGAT,=5%*25%,0,5,,,,164
+IKA.06,D.2.1,Indeks Kepuasan Masyarakat (IKM),ANGKA,=6.25%/5,0,5,,,,165
+IKA.06,D.2.2,Efisiensi Waktu Pelayanan,ANGKA,=6.25%/5,0,5,,,,166
+IKA.06,D.2.3,Tingkat Pengaduan Ditindaklanjuti (TPD),ANGKA,=6.25%/5,0,5,,,,167
+IKA.06,D.2.4,Tingkat Keberhasilan Pemenuhan Layanan,ANGKA,=6.25%/5,0,5,,,,168
+IKA.06,D.3,Aspek Kapabilitas Internal,AGREGAT,=5%*20%,0,5,,,,169
+IKA.06,D.3.1,Sumber Daya Manusia,ANGKA,=6.25%/5,0,5,,,,170
+IKA.06,D.3.2,Proses Bisnis,ANGKA,=6.25%/5,0,5,,,,171
+IKA.06,D.3.3,Teknologi,ANGKA,=6.25%/5,0,5,,,,172
+IKA.06,D.3.4,Customer Focus,ANGKA,=6.25%/5,0,5,,,,173
+IKA.06,D.4,Aspek Tata Kelola dan Kepemimpinan,AGREGAT,=5%*20%,0,5,,,,174
+IKA.06,D.4.1,Perencanaan Strategis,ANGKA,0.01,0,5,,,,175
+IKA.06,D.4.2,Etika Bisnis,ANGKA,0.01,0,5,,,,176
+IKA.06,D.4.3,Stakeholder Relationship,ANGKA,0.01,0,5,,,,177
+IKA.06,D.4.4,Manajemen risiko,ANGKA,0.01,0,5,,,,178
+IKA.06,D.4.5,Pengawasan dan Pelaporan,ANGKA,0.01,0,5,,,,179
+IKA.06,D.5,Aspek Inovasi,AGREGAT,=5%*10%,0,5,,,,180
+IKA.06,D.5.1,Keterlibatan Pengguna Jasa,ANGKA,0.0125,0,5,,,,181
+IKA.06,D.5.2,Proses Inovasi,ANGKA,0.0125,0,5,,,,182
+IKA.06,D.5.3,Manajemen Pengetahuan,ANGKA,0.0125,0,5,,,,183
+IKA.06,D.5.4,Manajemen Perubahan,ANGKA,0.0125,0,5,,,,184
+IKA.06,D.6,Aspek Lingkungan,AGREGAT,=5%*5%,0,5,,,,185
+IKA.06,D.6.1,Manajemen Lingkungan,ANGKA,0.025,0,5,,,,186
+IKA.06,D.6.2,Penggunaan Sumber Daya,ANGKA,0.025,0,5,,,,187

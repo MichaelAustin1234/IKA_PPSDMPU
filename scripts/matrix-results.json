@@ -1,0 +1,1303 @@
+{
+  "matrixByIka": {
+    "IKA.01": [
+      {
+        "path": "SKA.01/IKA.01/A/A_LULUS",
+        "nama": "Jumlah Lulusan",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/A/A.1/A_TEPAT",
+        "nama": "Jumlah Lulusan Tepat Waktu",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/A/A.2/A_IPK_35",
+        "nama": "Jumlah Lulusan dengan IPK >= 3,5 - 4,0",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/A/A.2/A_IPK_30",
+        "nama": "Jumlah Lulusan dengan IPK >= 3,0 dan IPK < 3,5",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/A/A.2/A_IPK_275",
+        "nama": "Jumlah Lulusan dengan IPK >= 2,75 dan IPK < 3",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/A/A.2/A_IPK_KURANG",
+        "nama": "Jumlah Lulusan dengan IPK < 2,75",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.1/B.1.1/B1_NASIONAL",
+        "nama": "Jumlah lulusan pendidikan yang memiliki sertifikat kompetensi berstandar nasional",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.1/B.1.2/B1_INTERNASIONAL",
+        "nama": "Jumlah lulusan pendidikan yang memiliki sertifikat kompetensi berstandar internasional",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.2/B2_PESERTA",
+        "nama": "Jumlah Peserta Pelatihan",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.2/B.2.1/B2_LULUS_NAS",
+        "nama": "Jumlah Lulusan Pelatihan Teknis Tersertifikasi Nasional (BNSP / DJU)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.2/B.2.2/B2_LULUS_INT",
+        "nama": "Jumlah Lulusan Pelatihan Teknis Tersertifikasi Internasional",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/B/B.2/B.2.3/B2_LULUS_NON",
+        "nama": "Jumlah Lulusan Pelatihan Teknis Non-Sertifikasi",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.6",
+        "nama": "Jumlah lulusan sampai dengan tahun t",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.1",
+        "nama": "Jumlah Lulusan Bekerja <= 6 bulan (75%)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.2",
+        "nama": "Jumlah Lulusan Bekerja > 6 bulan s.d 12 bulan (20%)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.3",
+        "nama": "Jumlah Lulusan Bekerja > 12 bulan s.d 18 bulan (3%)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.4",
+        "nama": "Jumlah Lulusan Bekerja > 18 bulan s.d 24 bulan (2%)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/C/C.5",
+        "nama": "Jumlah Lulusan Bekerja > 24 bulan atau belum bekerja (0%)",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/D/D.1",
+        "nama": "Aspek Kompetensi",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/D/D.2",
+        "nama": "Aspek Kinerja",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.01/IKA.01/D/D.3",
+        "nama": "Aspek Etos Kerja",
+        "upts": [
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      }
+    ],
+    "IKA.03": [
+      {
+        "path": "SKA.03/IKA.03/IKA.03.A/IKA.03.A.1",
+        "nama": "Jumlah Skor Aspek Kebijakan yang Selaras",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.A/IKA.03.A.2",
+        "nama": "Jumlah Aspek Kebijakan",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.B/IKA.03.B.1",
+        "nama": "Jumlah Skor Aspek Kebijakan yang Relevan",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.B/IKA.03.B.2",
+        "nama": "Jumlah Aspek Kebijakan",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.C/IKA.03.C.1",
+        "nama": "Turunan Skor Kelulusan (IKA.01.A)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.C/IKA.03.C.2",
+        "nama": "Turunan Skor Sertifikasi (IKA.01.B)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.C/IKA.03.C.3",
+        "nama": "Turunan Skor Penyerapan (IKA.01.C)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.C/IKA.03.C.4",
+        "nama": "Turunan Skor Kepuasan (IKA.01.D)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.D/IKA.03.D.1",
+        "nama": "Jumlah Bentuk Keterlibatan Industri Terjalin",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.03/IKA.03/IKA.03.D/IKA.03.D.2",
+        "nama": "Jumlah Bentuk Keterlibatan Industri Mungkin Terjalin",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      }
+    ],
+    "IKA.04": [
+      {
+        "path": "SKA.04/IKA.04/IKA.04.B/IKA.04.B.3",
+        "nama": "Jumlah Dosen / Instruktur",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.A/IKA.04.A.1",
+        "nama": "Rata-Rata Skor Kepuasan Peserta Didik",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.A/IKA.04.A.2",
+        "nama": "Jumlah Responden Peserta Didik",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.B/IKA.04.B.1",
+        "nama": "Jumlah Dosen dan Instruktur Berkualifikasi (95%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.B/IKA.04.B.2",
+        "nama": "Jumlah Dosen dan Instruktur Tersertifikasi (85%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.C/IKA.04.C.1.1",
+        "nama": "Jumlah Fasilitas Utama Pembelajaran",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.C/IKA.04.C.1.2",
+        "nama": "Jumlah Fasilitas Penunjang Pembelajaran",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.C/IKA.04.C.2.1",
+        "nama": "Jumlah Fasilitas Utama yang Layak",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.C/IKA.04.C.2.2",
+        "nama": "Jumlah Fasilitas Penunjang yang Layak",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.D/IKA.04.D.1",
+        "nama": "Penerapan Standar Mutu ISO 9001",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.D/IKA.04.D.2",
+        "nama": "Kepatuhan Standar Nasional Diklat Transportasi Udara",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.D/IKA.04.D.3",
+        "nama": "Pelaksanaan Audit Internal dan Eksternal Berkala",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.04/IKA.04/IKA.04.D/IKA.04.D.4",
+        "nama": "Efektivitas Tindakan Perbaikan dan Pencegahan (CAPA)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      }
+    ],
+    "IKA.06": [
+      {
+        "path": "SKA.06/IKA.06/IKA.06.A",
+        "nama": "Nilai SAKIP UPT",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.1/IKA.06.B.1.1",
+        "nama": "Revisi DIPA",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.1/IKA.06.B.1.2",
+        "nama": "Deviasi Halaman III DIPA",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.2/IKA.06.B.2.1",
+        "nama": "Penyerapan Anggaran",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.2/IKA.06.B.2.2",
+        "nama": "Belanja Kontraktual",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.2/IKA.06.B.2.3",
+        "nama": "Penyelesaian Tagihan",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.2/IKA.06.B.2.4",
+        "nama": "Pengelolaan UP dan TUP",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.B/IKA.06.B.3/IKA.06.B.3.1",
+        "nama": "Capaian Output",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.C",
+        "nama": "Nilai Indeks Kearsipan UPT",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.1",
+        "nama": "Aspek Keuangan (20%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.2",
+        "nama": "Aspek Pelayanan / Operasional (25%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.3",
+        "nama": "Aspek Kapabilitas Internal (20%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.4",
+        "nama": "Aspek Tata Kelola dan Kepemimpinan (20%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.5",
+        "nama": "Aspek Inovasi (10%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.06/IKA.06/IKA.06.D/IKA.06.D.6",
+        "nama": "Aspek Lingkungan (5%)",
+        "upts": [
+          "API_BANYUWANGI",
+          "BP3_CURUG",
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      }
+    ],
+    "IKA.02": [
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.1",
+        "nama": "Akreditasi Institusi PPI Curug",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.2",
+        "nama": "Akreditasi Institusi Poltekbang Surabaya",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.3",
+        "nama": "Akreditasi Institusi Poltekbang Medan",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.4",
+        "nama": "Akreditasi Institusi Poltekbang Makassar",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.5",
+        "nama": "Akreditasi Institusi Poltekbang Palembang",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.6",
+        "nama": "Akreditasi Institusi Poltekbang Jayapura",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.A/IKA.02.A.7",
+        "nama": "Akreditasi Institusi API Banyuwangi",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.1",
+        "nama": "D-III Teknik Mekanikal Bandara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.2",
+        "nama": "D-III Teknik Bangunan dan Landasan",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.3",
+        "nama": "D-III Penerangan Aeronautika",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.4",
+        "nama": "D-III Pertolongan Kecelakaan Pesawat",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.5",
+        "nama": "D-III Operasi Bandar Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.6",
+        "nama": "D-IV Lalu Lintas Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.7",
+        "nama": "D-IV Penerbang",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.8",
+        "nama": "D-IV Teknik Listrik Bandara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.9",
+        "nama": "D-IV Teknik Pesawat Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.1/IKA.02.B.1.10",
+        "nama": "D-IV Teknik Navigasi Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.1",
+        "nama": "D-III Komunikasi Penerbangan",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.2",
+        "nama": "D-III Lalu Lintas Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.3",
+        "nama": "D-III Manajemen Transportasi Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.4",
+        "nama": "D-III Teknik Bangunan dan Landasan",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.5",
+        "nama": "D-III Teknik Listrik Bandara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.6",
+        "nama": "D-III Teknik Navigasi Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.2/IKA.02.B.2.7",
+        "nama": "D-III Teknik Pesawat Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.3/IKA.02.B.3.1",
+        "nama": "D-III Pemanduan Lalu Lintas Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.3/IKA.02.B.3.2",
+        "nama": "D-III Teknik Telekomunikasi dan Navigasi Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.3/IKA.02.B.3.3",
+        "nama": "D-III Teknik Listrik Bandara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.3/IKA.02.B.3.4",
+        "nama": "D-III Teknologi Pemeliharaan Pesawat Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.4/IKA.02.B.4.1",
+        "nama": "D-III Manajemen Lalu Lintas Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.4/IKA.02.B.4.2",
+        "nama": "D-III Teknologi Navigasi Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.4/IKA.02.B.4.3",
+        "nama": "D-III Teknologi Bandar Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.4/IKA.02.B.4.4",
+        "nama": "D-III Teknologi Pemeliharaan Pesawat Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "POLTEKBANG_SBY",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.5/IKA.02.B.5.1",
+        "nama": "D-III Manajemen Bandar Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.5/IKA.02.B.5.2",
+        "nama": "D-III Penyelamatan dan Pemadam Kebakaran Penerbangan",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.5/IKA.02.B.5.3",
+        "nama": "D-IV Teknologi Rekayasa Bandar Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.6/IKA.02.B.6.1",
+        "nama": "D-III Manajemen Lalu Lintas Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.6/IKA.02.B.6.2",
+        "nama": "D-III Manajemen Bandar Udara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.6/IKA.02.B.6.3",
+        "nama": "D-III Teknik Listrik Bandara",
+        "upts": [
+          "POLTEKBANG_JYP",
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.7/IKA.02.B.7.1",
+        "nama": "D-III Operasi Pesawat Udara",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.B/IKA.02.B.7/IKA.02.B.7.2",
+        "nama": "D-III Penerbang Sayap Tetap",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.C/IKA.02.C.1",
+        "nama": "Jumlah Program Pelatihan Tersertifikasi (Approval Ditjen Hubud / Internasional)",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.C/IKA.02.C.2",
+        "nama": "Total Program Pelatihan",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.D/IKA.02.D.1.1",
+        "nama": "Jumlah Lulusan Pelatihan dengan Status Pekerja (non-alumni)",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.D/IKA.02.D.1.2",
+        "nama": "Jumlah Serapan Lulusan Tersertifikasi",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.02/IKA.02/IKA.02.D/IKA.02.D.2",
+        "nama": "Jumlah Serapan Lulusan dan Peserta Pelatihan Tersertifikasi",
+        "upts": [
+          "POLTEKBANG_MDN",
+          "POLTEKBANG_MKS",
+          "POLTEKBANG_PLB",
+          "PPIC"
+        ]
+      }
+    ],
+    "IKA.05": [
+      {
+        "path": "SKA.05/IKA.05/IKA.05.1",
+        "nama": "Indeks Profesionalitas ASN - PPSDMPU (Pusat)",
+        "upts": [
+          "PPIC"
+        ]
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.4",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Medan",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.7",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Jayapura",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.2",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Indonesia Curug",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.5",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Makassar",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.8",
+        "nama": "Indeks Profesionalitas ASN - Akademi Penerbang Indonesia Banyuwangi",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.3",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Surabaya",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.6",
+        "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Palembang",
+        "upts": []
+      },
+      {
+        "path": "SKA.05/IKA.05/IKA.05.9",
+        "nama": "Indeks Profesionalitas ASN - Balai Diklat Penerbangan Curug",
+        "upts": []
+      }
+    ]
+  },
+  "leavesWithoutUptList": [
+    {
+      "path": "SKA.05/IKA.05/IKA.05.4",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Medan",
+      "kode": "IKA.05.4"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.7",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Jayapura",
+      "kode": "IKA.05.7"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.2",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Indonesia Curug",
+      "kode": "IKA.05.2"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.5",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Makassar",
+      "kode": "IKA.05.5"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.8",
+      "nama": "Indeks Profesionalitas ASN - Akademi Penerbang Indonesia Banyuwangi",
+      "kode": "IKA.05.8"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.3",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Surabaya",
+      "kode": "IKA.05.3"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.6",
+      "nama": "Indeks Profesionalitas ASN - Politeknik Penerbangan Palembang",
+      "kode": "IKA.05.6"
+    },
+    {
+      "path": "SKA.05/IKA.05/IKA.05.9",
+      "nama": "Indeks Profesionalitas ASN - Balai Diklat Penerbangan Curug",
+      "kode": "IKA.05.9"
+    }
+  ]
+}
