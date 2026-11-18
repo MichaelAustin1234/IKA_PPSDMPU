@@ -11,6 +11,8 @@ import {
   Building2,
   ShieldCheck,
   UserCheck,
+  Users,
+  CalendarClock,
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { createClient } from '@/lib/supabase/client';
@@ -35,7 +37,7 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
 
   const getLaporanLabel = (role?: string) => {
     if (role === 'ADMIN_UPT') return 'Status Laporan';
-    if (role === 'PIMPINAN') return 'Monitoring Laporan';
+    if (role === 'PIMPINAN' || role === 'SUPER_ADMIN') return 'Monitoring Laporan';
     return 'Verifikasi Laporan';
   };
 
@@ -56,7 +58,19 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
       label: 'Input Data Pusat',
       href: `/input/${activePeriode}`,
       icon: FileSpreadsheet,
-      roles: ['ADMIN_PUSAT', 'SUPER_ADMIN'],
+      roles: ['ADMIN_PUSAT'],
+    },
+    {
+      label: 'Manajemen Pengguna',
+      href: '/users',
+      icon: Users,
+      roles: ['SUPER_ADMIN'],
+    },
+    {
+      label: 'Pengaturan Periode',
+      href: '/periode',
+      icon: CalendarClock,
+      roles: ['SUPER_ADMIN'],
     },
     {
       label: getLaporanLabel(profile?.role),
