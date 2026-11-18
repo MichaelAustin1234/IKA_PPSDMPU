@@ -24,7 +24,10 @@ export default async function LaporanPage() {
     .eq('id', user.id)
     .single();
 
-  const isSuperOrPimpinan = profileData?.role === 'SUPER_ADMIN' || profileData?.role === 'PIMPINAN';
+  const isSuperOrPimpinan =
+    profileData?.role === 'SUPER_ADMIN' ||
+    profileData?.role === 'ADMIN_PUSAT' ||
+    profileData?.role === 'PIMPINAN';
 
   const [{ data: laporanData }, { data: periodeData }] = await Promise.all([
     (isSuperOrPimpinan ? adminClient : supabase)

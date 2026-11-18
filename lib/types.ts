@@ -1,7 +1,7 @@
 // lib/types.ts
 // Tipe data terpusat sistem IKA PPSDMPU sesuai skema PostgreSQL (0001_init_schema.sql)
 
-export type UserRole = 'ADMIN_UPT' | 'SUPER_ADMIN' | 'PIMPINAN';
+export type UserRole = 'SUPER_ADMIN' | 'ADMIN_PUSAT' | 'ADMIN_UPT' | 'PIMPINAN';
 
 export interface Upt {
   id: string;

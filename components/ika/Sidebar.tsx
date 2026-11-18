@@ -38,7 +38,7 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
       label: 'Dashboard',
       href: '/dashboard',
       icon: LayoutDashboard,
-      roles: ['ADMIN_UPT', 'SUPER_ADMIN', 'PIMPINAN'],
+      roles: ['ADMIN_UPT', 'ADMIN_PUSAT', 'SUPER_ADMIN', 'PIMPINAN'],
     },
     {
       label: 'Input Data IKA',
@@ -50,19 +50,19 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
       label: 'Input Data Pusat',
       href: `/input/${activePeriode}`,
       icon: FileSpreadsheet,
-      roles: ['SUPER_ADMIN'],
+      roles: ['ADMIN_PUSAT', 'SUPER_ADMIN'],
     },
     {
       label: 'Laporan & Approval',
       href: '/laporan',
       icon: Table,
-      roles: ['ADMIN_UPT', 'SUPER_ADMIN', 'PIMPINAN'],
+      roles: ['ADMIN_UPT', 'ADMIN_PUSAT', 'SUPER_ADMIN', 'PIMPINAN'],
     },
     {
       label: 'Pohon Indikator',
       href: '/indicators',
       icon: Layers,
-      roles: ['SUPER_ADMIN', 'PIMPINAN', 'ADMIN_UPT'],
+      roles: ['SUPER_ADMIN', 'ADMIN_PUSAT', 'PIMPINAN', 'ADMIN_UPT'],
     },
   ];
 
@@ -119,7 +119,7 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
           <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/40">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 flex items-center justify-center text-indigo-700 dark:text-indigo-300">
-                {profile.role === 'SUPER_ADMIN' ? (
+                {profile.role === 'SUPER_ADMIN' || profile.role === 'ADMIN_PUSAT' ? (
                   <ShieldCheck className="w-4 h-4" />
                 ) : profile.role === 'ADMIN_UPT' ? (
                   <Building2 className="w-4 h-4" />

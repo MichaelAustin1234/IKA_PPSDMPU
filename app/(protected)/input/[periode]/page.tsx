@@ -41,10 +41,10 @@ export default async function InputPeriodePage({
     redirect('/dashboard');
   }
 
-  const isSuperAdmin = profile?.role === 'SUPER_ADMIN';
+  const isPusatOrSuper = profile?.role === 'SUPER_ADMIN' || profile?.role === 'ADMIN_PUSAT';
   let upt: Upt | null = profile?.upt ?? null;
 
-  if (isSuperAdmin && !upt) {
+  if (isPusatOrSuper && !upt) {
     const { data: ppsdmpuUpt } = await adminClient
       .from('upt')
       .select('*')
@@ -54,7 +54,7 @@ export default async function InputPeriodePage({
   }
 
   // Pembagian kewenangan: UPT mengisi IKA.01, 02, 04. Pusat mengisi IKA.03, 05, 06.
-  const allowedIkas = isSuperAdmin
+  const allowedIkas = isPusatOrSuper
     ? ['IKA.03', 'IKA.05', 'IKA.06']
     : ['IKA.01', 'IKA.02', 'IKA.04'];
 
