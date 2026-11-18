@@ -41,6 +41,10 @@ export async function submitLaporanAction(payload: SubmitLaporanPayload) {
       return { success: false, error: 'Role Pimpinan bersifat read-only dan tidak dapat mengirim laporan.' };
     }
 
+    if (profile.role === 'SUPER_ADMIN') {
+      return { success: false, error: 'Role Super Admin bertugas mengelola sistem dan tidak berwenang mengirim laporan kinerja.' };
+    }
+
     // Jika Admin UPT, pastikan hanya submit untuk UPT miliknya sendiri
     if (profile.role === 'ADMIN_UPT' && profile.upt_id !== payload.uptId) {
       return { success: false, error: 'Anda hanya memiliki hak akses untuk UPT Anda sendiri.' };

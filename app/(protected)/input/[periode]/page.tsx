@@ -36,15 +36,15 @@ export default async function InputPeriodePage({
     .eq('id', user.id)
     .single();
 
-  // Pimpinan bersifat read-only
-  if (profile?.role === 'PIMPINAN') {
+  // Pimpinan bersifat read-only dan Super Admin fokus pada administrasi sistem
+  if (profile?.role === 'PIMPINAN' || profile?.role === 'SUPER_ADMIN') {
     redirect('/dashboard');
   }
 
-  const isPusatOrSuper = profile?.role === 'SUPER_ADMIN' || profile?.role === 'ADMIN_PUSAT';
+  const isPusat = profile?.role === 'ADMIN_PUSAT';
   let upt: Upt | null = profile?.upt ?? null;
 
-  if (isPusatOrSuper && !upt) {
+  if (isPusat && !upt) {
     const { data: ppsdmpuUpt } = await adminClient
       .from('upt')
       .select('*')
@@ -54,7 +54,7 @@ export default async function InputPeriodePage({
   }
 
   // Pembagian kewenangan: UPT mengisi IKA.01, 02, 04. Pusat mengisi IKA.03, 05, 06.
-  const allowedIkas = isPusatOrSuper
+  const allowedIkas = isPusat
     ? ['IKA.03', 'IKA.05', 'IKA.06']
     : ['IKA.01', 'IKA.02', 'IKA.04'];
 
