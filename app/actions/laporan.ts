@@ -145,3 +145,25 @@ export async function submitLaporanAction(payload: SubmitLaporanPayload) {
     return { success: false, error: message };
   }
 }
+
+/**
+ * Mengambil daftar periode untuk dropdown halaman login (publik/server action)
+ * Menggunakan adminClient agar dapat dibaca sebelum pengguna login.
+ */
+export async function getDaftarPeriodeAction() {
+  try {
+    const adminClient = createAdminClient();
+    const { data: periodes, error } = await adminClient
+      .from('periode')
+      .select('id, tahun, triwulan, status')
+      .order('tahun', { ascending: false })
+      .order('triwulan', { ascending: false });
+
+    if (error) throw error;
+    return { success: true, data: periodes || [] };
+  } catch (err) {
+    console.error('Gagal mengambil daftar periode:', err);
+    return { success: false, data: [] };
+  }
+}
+

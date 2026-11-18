@@ -1,11 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { getDaftarPeriodeAction } from '@/app/actions/laporan';
 import { LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { ThemeToggle } from '@/components/ika/ThemeToggle';
+
+interface PeriodeItem {
+  id: string;
+  tahun: number;
+  triwulan: number;
+  status: 'BUKA' | 'TUTUP';
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,8 +21,33 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [selectedPeriode, setSelectedPeriode] = useState('2026-Q2');
+  const [periodeList, setPeriodeList] = useState<PeriodeItem[]>([
+    { id: '1', tahun: 2026, triwulan: 2, status: 'BUKA' },
+    { id: '2', tahun: 2026, triwulan: 1, status: 'TUTUP' },
+    { id: '3', tahun: 2026, triwulan: 3, status: 'TUTUP' },
+    { id: '4', tahun: 2026, triwulan: 4, status: 'TUTUP' },
+  ]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Ambil daftar periode dari database secara real-time dan pasang default ke triwulan yang BUKA
+  useEffect(() => {
+    async function loadPeriodes() {
+      const res = await getDaftarPeriodeAction();
+      if (res.success && res.data.length > 0) {
+        setPeriodeList(res.data as PeriodeItem[]);
+        // Cari periode yang statusnya BUKA
+        const periodeBuka = res.data.find((p) => p.status === 'BUKA');
+        if (periodeBuka) {
+          setSelectedPeriode(`${periodeBuka.tahun}-Q${periodeBuka.triwulan}`);
+        } else {
+          const first = res.data[0];
+          setSelectedPeriode(`${first.tahun}-Q${first.triwulan}`);
+        }
+      }
+    }
+    loadPeriodes();
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -189,7 +222,9 @@ export default function LoginPage() {
                   Sesi Periode Pelaporan
                 </label>
                 <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800/60">
-                  Kuartal Aktif
+                  {periodeList.find((p) => `${p.tahun}-Q${p.triwulan}` === selectedPeriode)?.status === 'BUKA'
+                    ? 'Kuartal Terbuka'
+                    : 'Kuartal Tertutup'}
                 </span>
               </div>
               <select
@@ -198,13 +233,14 @@ export default function LoginPage() {
                 onChange={(e) => setSelectedPeriode(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-medium transition-all"
               >
-                <option value="2026-Q2">Tahun 2026 - Triwulan 2 (BUKA)</option>
-                <option value="2026-Q1">Tahun 2026 - Triwulan 1 (TUTUP)</option>
-                <option value="2026-Q3">Tahun 2026 - Triwulan 3 (TUTUP)</option>
-                <option value="2026-Q4">Tahun 2026 - Triwulan 4 (TUTUP)</option>
+                {periodeList.map((p) => (
+                  <option key={p.id} value={`${p.tahun}-Q${p.triwulan}`}>
+                    Tahun {p.tahun} - Triwulan {p.triwulan} ({p.status})
+                  </option>
+                ))}
               </select>
               <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
-                Aplikasi otomatis memonitor capaian triwulan yang Anda pilih.
+                Default otomatis kuartal aktif ({periodeList.find((p) => p.status === 'BUKA') ? `Q${periodeList.find((p) => p.status === 'BUKA')?.triwulan} ${periodeList.find((p) => p.status === 'BUKA')?.tahun}` : 'saat ini'}). Anda tetap bisa memilih triwulan yang sudah ditutup.
               </p>
             </div>
 
