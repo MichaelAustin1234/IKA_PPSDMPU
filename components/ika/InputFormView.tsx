@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { submitLaporanAction } from '@/app/actions/laporan';
 import { Save, Send, AlertCircle, CheckCircle, Info, Layers, Calendar } from 'lucide-react';
 import type { IndikatorNode, PredikatKonversi, Laporan, Periode, Upt } from '@/lib/types';
 
@@ -121,9 +122,36 @@ export function InputFormView({
       return;
     }
 
-    if (isSubmit) setSubmitting(true);
-    else setSaving(true);
+    if (isSubmit) {
+      setSubmitting(true);
+      try {
+        const res = await submitLaporanAction({
+          laporanId: laporan?.id,
+          uptId: upt.id,
+          periodeId: periode.id,
+          values,
+        });
 
+        if (!res.success) {
+          throw new Error(res.error);
+        }
+
+        setStatusMsg({
+          type: 'success',
+          text: `Laporan berhasil disubmit (${totalFilled} indikator) dan kalkulasi otomatis ${res.calculatedCount} node tersimpan! Menunggu persetujuan Super Admin.`,
+        });
+
+        router.refresh();
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Gagal mengirimkan laporan';
+        setStatusMsg({ type: 'error', text: msg });
+      } finally {
+        setSubmitting(false);
+      }
+      return;
+    }
+
+    setSaving(true);
     try {
       const supabase = createClient();
 
@@ -135,8 +163,8 @@ export function InputFormView({
           .insert({
             upt_id: upt.id,
             periode_id: periode.id,
-            status: isSubmit ? 'SUBMITTED' : 'DRAFT',
-            submitted_at: isSubmit ? new Date().toISOString() : null,
+            status: 'DRAFT',
+            submitted_at: null,
           })
           .select('id')
           .single();
@@ -147,8 +175,8 @@ export function InputFormView({
         await supabase
           .from('laporan')
           .update({
-            status: isSubmit ? 'SUBMITTED' : 'DRAFT',
-            submitted_at: isSubmit ? new Date().toISOString() : null,
+            status: 'DRAFT',
+            submitted_at: null,
           })
           .eq('id', laporanId);
       }
@@ -174,18 +202,15 @@ export function InputFormView({
 
       setStatusMsg({
         type: 'success',
-        text: isSubmit
-          ? `Laporan berhasil disubmit (${totalFilled} indikator terisi) dan menunggu persetujuan Super Admin!`
-          : `Draft formulir berhasil disimpan (${totalFilled} indikator terisi).`,
+        text: `Draft formulir berhasil disimpan (${totalFilled} indikator terisi).`,
       });
 
       router.refresh();
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Gagal menyimpan data';
+      const msg = err instanceof Error ? err.message : 'Gagal menyimpan draft';
       setStatusMsg({ type: 'error', text: msg });
     } finally {
       setSaving(false);
-      setSubmitting(false);
     }
   };
 

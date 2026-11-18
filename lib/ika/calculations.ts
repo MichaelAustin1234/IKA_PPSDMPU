@@ -381,4 +381,267 @@ export function hitungTotalIka02(
   return Math.round(total * 100) / 100;
 }
 
+// ============================================================================
+// MESIN KALKULASI POHON LENGKAP & GENERASI SNAPSHOT (F10)
+// ============================================================================
+
+export interface SnapshotItem {
+  node_id: string;
+  realisasi: number | null;
+  skor_normalisasi: number | null;
+  skor_terbobot: number | null;
+}
+
+export interface InputItemData {
+  nilai_angka: number | null;
+  predikat_id: string | null;
+}
+
+export interface NodeMetadata {
+  id: string;
+  parent_id: string | null;
+  kode: string;
+  nama: string;
+  level: 'SKA' | 'IKA' | 'KOMPONEN' | 'SUB' | 'LEAF';
+  bobot: number;
+  tipe_input: 'ANGKA' | 'PREDIKAT' | 'TURUNAN';
+  cap_100: boolean;
+  min_nilai: number | null;
+  max_nilai: number | null;
+  max_ref_node_id: string | null;
+  max_persen: number | null;
+  urutan?: number;
+}
+
+/**
+ * Menghitung seluruh node pohon dari data isian (laporan_isi) secara bottom-up.
+ * Menghasilkan daftar record snapshot untuk disimpan ke tabel hasil_hitung.
+ */
+export function hitungSnapshotLaporan(
+  allNodes: NodeMetadata[],
+  inputMap: Record<string, InputItemData>,
+  predikatMap: Record<string, number>
+): SnapshotItem[] {
+  const nodeMap = new Map<string, NodeMetadata>(allNodes.map((n) => [n.id, n]));
+  const nodeByKode = new Map<string, NodeMetadata>(allNodes.map((n) => [n.kode, n]));
+
+  // Kelompokkan children per parent_id
+  const childrenMap = new Map<string, NodeMetadata[]>();
+  allNodes.forEach((node) => {
+    if (node.parent_id) {
+      const arr = childrenMap.get(node.parent_id) || [];
+      arr.push(node);
+      childrenMap.set(node.parent_id, arr);
+    }
+  });
+
+  const resultMap = new Map<string, SnapshotItem>();
+
+  // Helper untuk mengambil nilai numerik mentah leaf node
+  function getRawLeafValue(node: NodeMetadata): number | null {
+    const input = inputMap[node.id];
+    if (!input) return null;
+
+    if (node.tipe_input === 'ANGKA') {
+      return input.nilai_angka !== null && input.nilai_angka !== undefined ? Number(input.nilai_angka) : null;
+    }
+    if (node.tipe_input === 'PREDIKAT' && input.predikat_id) {
+      return predikatMap[input.predikat_id] ?? null;
+    }
+    return null;
+  }
+
+  // 1. Evaluasi seluruh LEAF nodes terlebih dahulu
+  allNodes
+    .filter((n) => n.level === 'LEAF')
+    .forEach((leaf) => {
+      const rawVal = getRawLeafValue(leaf);
+      let normalSkor: number | null = null;
+
+      if (rawVal !== null) {
+        // Tentukan nilai max (apakah dinamis atau statis)
+        let maxVal = leaf.max_nilai ?? 100;
+        if (leaf.max_ref_node_id && leaf.max_persen) {
+          const refNode = nodeMap.get(leaf.max_ref_node_id);
+          const refVal = refNode ? getRawLeafValue(refNode) ?? 0 : 0;
+          maxVal = hitungBatasMaxDinamis(refVal, leaf.max_persen);
+        }
+
+        const minVal = leaf.min_nilai ?? 0;
+        normalSkor = hitungNormalisasi(rawVal, minVal, maxVal, leaf.cap_100);
+      }
+
+      const bobot = Number(leaf.bobot) || 0;
+      const skorTerbobot = normalSkor !== null ? Math.round(normalSkor * bobot * 100) / 100 : null;
+
+      resultMap.set(leaf.id, {
+        node_id: leaf.id,
+        realisasi: rawVal,
+        skor_normalisasi: normalSkor,
+        skor_terbobot: skorTerbobot,
+      });
+    });
+
+  // 2. Evaluasi node rekursif bottom-up untuk SUB, KOMPONEN, IKA, dan SKA
+  function evaluateNode(nodeId: string): SnapshotItem {
+    if (resultMap.has(nodeId)) {
+      return resultMap.get(nodeId)!;
+    }
+
+    const node = nodeMap.get(nodeId);
+    if (!node) {
+      return { node_id: nodeId, realisasi: null, skor_normalisasi: null, skor_terbobot: null };
+    }
+
+    // Tangani kasus khusus formula terprogram
+    if (node.kode === 'A.1') {
+      const lulusNode = nodeByKode.get('A_LULUS');
+      const tepatNode = nodeByKode.get('A_TEPAT');
+      const lulusVal = lulusNode ? getRawLeafValue(lulusNode) : null;
+      const tepatVal = tepatNode ? getRawLeafValue(tepatNode) : null;
+
+      if (lulusVal && lulusVal > 0 && tepatVal !== null) {
+        const realisasi = (tepatVal / lulusVal) * 100;
+        const skorNormal = hitungNormalisasi(realisasi, 0, 100, true);
+        const bobot = Number(node.bobot) || 0.6;
+        const res: SnapshotItem = {
+          node_id: node.id,
+          realisasi: Math.round(realisasi * 100) / 100,
+          skor_normalisasi: skorNormal,
+          skor_terbobot: Math.round(skorNormal * bobot * 100) / 100,
+        };
+        resultMap.set(node.id, res);
+        return res;
+      }
+    }
+
+    if (node.kode === 'A.2') {
+      const lulusNode = nodeByKode.get('A_LULUS');
+      const ipk35Node = nodeByKode.get('A_IPK_35');
+      const ipk30Node = nodeByKode.get('A_IPK_30');
+      const lulusVal = lulusNode ? getRawLeafValue(lulusNode) : null;
+      const ipk35 = ipk35Node ? getRawLeafValue(ipk35Node) ?? 0 : 0;
+      const ipk30 = ipk30Node ? getRawLeafValue(ipk30Node) ?? 0 : 0;
+
+      if (lulusVal && lulusVal > 0) {
+        const realisasi = ((ipk35 + ipk30) / lulusVal) * 100;
+        const skorNormal = hitungNormalisasi(realisasi, 80, 100, true);
+        const bobot = Number(node.bobot) || 0.4;
+        const res: SnapshotItem = {
+          node_id: node.id,
+          realisasi: Math.round(realisasi * 100) / 100,
+          skor_normalisasi: skorNormal,
+          skor_terbobot: Math.round(skorNormal * bobot * 100) / 100,
+        };
+        resultMap.set(node.id, res);
+        return res;
+      }
+    }
+
+    // Kasus Komponen C IKA.01 (aturan cap jika C.1 >= 100)
+    if (node.kode === 'C' && node.level === 'KOMPONEN') {
+      const c1Node = nodeByKode.get('C.1');
+      const c1Snap = c1Node ? evaluateNode(c1Node.id) : null;
+      const children = childrenMap.get(node.id) || [];
+      const childSnaps = children.map((c) => evaluateNode(c.id));
+
+      if (c1Snap && c1Snap.skor_normalisasi !== null && c1Snap.skor_normalisasi >= 100) {
+        const bobot = Number(node.bobot) || 0.3;
+        const res: SnapshotItem = {
+          node_id: node.id,
+          realisasi: 100,
+          skor_normalisasi: 100,
+          skor_terbobot: Math.round(100 * bobot * 100) / 100,
+        };
+        resultMap.set(node.id, res);
+        return res;
+      }
+
+      // Normal akumulasi terbobot
+      let sumSkor = 0;
+      let hasData = false;
+      childSnaps.forEach((cs) => {
+        if (cs.skor_terbobot !== null) {
+          sumSkor += cs.skor_terbobot;
+          hasData = true;
+        }
+      });
+
+      const normalSkor = hasData ? Math.min(100, Math.round(sumSkor * 100) / 100) : null;
+      const bobot = Number(node.bobot) || 0.3;
+      const res: SnapshotItem = {
+        node_id: node.id,
+        realisasi: normalSkor,
+        skor_normalisasi: normalSkor,
+        skor_terbobot: normalSkor !== null ? Math.round(normalSkor * bobot * 100) / 100 : null,
+      };
+      resultMap.set(node.id, res);
+      return res;
+    }
+
+    // Default agregasi rekursif: Nilai parent = jumlah skor terbobot seluruh anak-anaknya
+    const children = childrenMap.get(node.id) || [];
+    if (children.length === 0) {
+      // Leaf yang belum dievaluasi
+      const rawVal = getRawLeafValue(node);
+      const res: SnapshotItem = {
+        node_id: node.id,
+        realisasi: rawVal,
+        skor_normalisasi: rawVal,
+        skor_terbobot: rawVal !== null ? Math.round(rawVal * Number(node.bobot) * 100) / 100 : null,
+      };
+      resultMap.set(node.id, res);
+      return res;
+    }
+
+    const childSnaps = children.map((c) => evaluateNode(c.id));
+    let sumSkor = 0;
+    let hasData = false;
+
+    // Cek apakah anak-anaknya memiliki bobot total > 0
+    const totalChildWeight = children.reduce((acc, c) => acc + (Number(c.bobot) || 0), 0);
+
+    if (totalChildWeight > 0) {
+      childSnaps.forEach((cs) => {
+        if (cs.skor_terbobot !== null) {
+          sumSkor += cs.skor_terbobot;
+          hasData = true;
+        }
+      });
+    } else {
+      // Jika bobot anak = 0 (misalnya prodi atau leaf rata-rata), gunakan rata-rata sederhana
+      const validSnaps = childSnaps.filter((cs) => cs.skor_normalisasi !== null);
+      if (validSnaps.length > 0) {
+        sumSkor = validSnaps.reduce((acc, cs) => acc + (cs.skor_normalisasi || 0), 0) / validSnaps.length;
+        hasData = true;
+      }
+    }
+
+    let finalNormal = hasData ? Math.round(sumSkor * 100) / 100 : null;
+    if (finalNormal !== null && node.cap_100 && finalNormal > 100) {
+      finalNormal = 100;
+    }
+
+    const bobot = Number(node.bobot) || 1.0;
+    const skorTerbobot = finalNormal !== null ? Math.round(finalNormal * bobot * 100) / 100 : null;
+
+    const res: SnapshotItem = {
+      node_id: node.id,
+      realisasi: finalNormal,
+      skor_normalisasi: finalNormal,
+      skor_terbobot: skorTerbobot,
+    };
+    resultMap.set(node.id, res);
+    return res;
+  }
+
+  // Evaluasi seluruh node pohon
+  allNodes.forEach((node) => {
+    evaluateNode(node.id);
+  });
+
+  return Array.from(resultMap.values());
+}
+
+
 

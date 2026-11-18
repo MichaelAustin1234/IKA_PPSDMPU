@@ -18,6 +18,7 @@ import {
   hitungIka02KomponenA,
   hitungIka02KomponenBPerUpt,
   hitungTotalIka02,
+  hitungSnapshotLaporan,
 } from '../lib/ika/calculations';
 
 describe('Unit Test Engine Perhitungan IKA (lib/ika/calculations.ts)', () => {
@@ -225,6 +226,38 @@ describe('Unit Test Engine Perhitungan IKA (lib/ika/calculations.ts)', () => {
     // Total = 87.5*0.3 + 80*0.3 + 75*0.2 + 85*0.2 = 26.25 + 24 + 15 + 17 = 82.25
     const total02 = hitungTotalIka02(87.5, 80, 75, 85);
     expect(total02).toBe(82.25);
+  });
+
+  // Test 18: Mesin Snapshot Bottom-Up Pohon Lengkap
+  it('18. Menghitung snapshot bottom-up pohon lengkap untuk hasil_hitung', () => {
+    const dummyNodes = [
+      { id: '1', parent_id: null, kode: 'SKA.01', nama: 'SKA 1', level: 'SKA' as const, bobot: 1, tipe_input: 'TURUNAN' as const, cap_100: false, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '2', parent_id: '1', kode: 'IKA.01', nama: 'IKA 1', level: 'IKA' as const, bobot: 1, tipe_input: 'TURUNAN' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '3', parent_id: '2', kode: 'A', nama: 'Komp A', level: 'KOMPONEN' as const, bobot: 0.5, tipe_input: 'TURUNAN' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '4', parent_id: '2', kode: 'B', nama: 'Komp B', level: 'KOMPONEN' as const, bobot: 0.5, tipe_input: 'ANGKA' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '5', parent_id: '3', kode: 'A_LULUS', nama: 'Lulus', level: 'LEAF' as const, bobot: 0, tipe_input: 'ANGKA' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '6', parent_id: '3', kode: 'A.1', nama: 'Sub A.1', level: 'SUB' as const, bobot: 1, tipe_input: 'TURUNAN' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+      { id: '7', parent_id: '6', kode: 'A_TEPAT', nama: 'Tepat', level: 'LEAF' as const, bobot: 0, tipe_input: 'ANGKA' as const, cap_100: true, min_nilai: 0, max_nilai: 100, max_ref_node_id: null, max_persen: null },
+    ];
+
+    const inputMap = {
+      '4': { nilai_angka: 80, predikat_id: null },
+      '5': { nilai_angka: 100, predikat_id: null },
+      '7': { nilai_angka: 90, predikat_id: null },
+    };
+
+    const snaps = hitungSnapshotLaporan(dummyNodes, inputMap, {});
+    expect(snaps.length).toBe(7);
+
+    const a1Snap = snaps.find((s) => s.node_id === '6');
+    expect(a1Snap?.skor_normalisasi).toBe(90);
+
+    const bSnap = snaps.find((s) => s.node_id === '4');
+    expect(bSnap?.skor_normalisasi).toBe(80);
+
+    const ikaSnap = snaps.find((s) => s.node_id === '2');
+    // A: 90 * 0.5 = 45, B: 80 * 0.5 = 40 -> total = 85
+    expect(ikaSnap?.skor_normalisasi).toBe(85);
   });
 });
 
