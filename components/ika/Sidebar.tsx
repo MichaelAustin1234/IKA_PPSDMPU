@@ -33,6 +33,12 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
     router.refresh();
   };
 
+  const getLaporanLabel = (role?: string) => {
+    if (role === 'ADMIN_UPT') return 'Status Laporan';
+    if (role === 'PIMPINAN') return 'Monitoring Laporan';
+    return 'Verifikasi Laporan';
+  };
+
   const menuItems = [
     {
       label: 'Dashboard',
@@ -53,7 +59,7 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
       roles: ['ADMIN_PUSAT', 'SUPER_ADMIN'],
     },
     {
-      label: 'Laporan & Approval',
+      label: getLaporanLabel(profile?.role),
       href: '/laporan',
       icon: Table,
       roles: ['ADMIN_UPT', 'ADMIN_PUSAT', 'SUPER_ADMIN', 'PIMPINAN'],

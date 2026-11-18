@@ -50,7 +50,8 @@ export function LaporanListView({
   const [reviewItems, setReviewItems] = useState<LaporanIsiDetail[]>([]);
   const [loadingItems, setLoadingItems] = useState<boolean>(false);
 
-  const isSuperAdmin = currentProfile.role === 'SUPER_ADMIN';
+  const canReview =
+    currentProfile.role === 'ADMIN_PUSAT' || currentProfile.role === 'SUPER_ADMIN';
 
   const handleReview = async (laporanId: string, status: 'APPROVED' | 'REJECTED') => {
     setActionLoading(laporanId);
@@ -174,7 +175,7 @@ export function LaporanListView({
                   <th className="py-3 px-4">Waktu Submit</th>
                   <th className="py-3 px-4 text-center">Status</th>
                   <th className="py-3 px-4 text-right">Rincian Data</th>
-                  {isSuperAdmin && <th className="py-3 px-4 text-right">Aksi Persetujuan</th>}
+                  {canReview && <th className="py-3 px-4 text-right">Aksi Persetujuan</th>}
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
@@ -207,7 +208,7 @@ export function LaporanListView({
                         <span>Review Data</span>
                       </button>
                     </td>
-                    {isSuperAdmin && (
+                    {canReview && (
                       <td className="py-3.5 px-4 text-right">
                         {l.status === 'SUBMITTED' ? (
                           <div className="flex items-center justify-end gap-1.5">
@@ -313,7 +314,7 @@ export function LaporanListView({
               >
                 Tutup
               </button>
-              {isSuperAdmin && reviewModalLaporan.status === 'SUBMITTED' && (
+              {canReview && reviewModalLaporan.status === 'SUBMITTED' && (
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleReview(reviewModalLaporan.id, 'REJECTED')}
