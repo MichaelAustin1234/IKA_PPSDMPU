@@ -129,9 +129,9 @@ export default function LoginPage() {
             alt="Gedung Pusat Pengembangan SDM Perhubungan Udara"
             fill
             priority
-            className="object-cover object-center scale-105 filter blur-xs opacity-35 dark:opacity-25"
+            className="object-cover object-center opacity-45 dark:opacity-35"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-indigo-950/80 to-slate-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-indigo-950/60" />
           {/* Subtle Grid Accent */}
           <div
             className="absolute inset-0 opacity-10"
