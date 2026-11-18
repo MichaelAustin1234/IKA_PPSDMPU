@@ -5,7 +5,19 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { getDaftarPeriodeAction } from '@/app/actions/laporan';
-import { LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import {
+  LogIn,
+  AlertCircle,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  Calendar,
+  ShieldCheck,
+  Layers,
+  Building2,
+  TrendingUp,
+} from 'lucide-react';
 import { ThemeToggle } from '@/components/ika/ThemeToggle';
 
 interface PeriodeItem {
@@ -20,8 +32,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
   // Helper penentu triwulan kalender saat ini
-  // Bulan 1-3 = TW 1, 4-6 = TW 2, 7-9 = TW 3, 10-12 = TW 4
   const now = new Date();
   const currentCalendarYear = now.getFullYear();
   const currentCalendarQuarter = Math.floor(now.getMonth() / 3) + 1;
@@ -38,10 +50,6 @@ export default function LoginPage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   // Ambil daftar periode dari database secara real-time
-  // Prioritas default:
-  // 1. Triwulan kalender saat ini jika ada di daftar periode
-  // 2. Jika tidak ada, triwulan yang berstatus BUKA oleh Pusat
-  // 3. Jika tidak ada, triwulan terbaru di database
   useEffect(() => {
     async function loadPeriodes() {
       const res = await getDaftarPeriodeAction();
@@ -68,6 +76,10 @@ export default function LoginPage() {
     loadPeriodes();
   }, [currentCalendarKey]);
 
+  const activePeriodeData = periodeList.find(
+    (p) => `${p.tahun}-Q${p.triwulan}` === selectedPeriode
+  );
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -76,14 +88,14 @@ export default function LoginPage() {
     try {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: email.trim(),
         password,
       });
 
       if (error) {
         setErrorMsg(
           error.message === 'Invalid login credentials'
-            ? 'Email atau kata sandi tidak sesuai.'
+            ? 'Email kedinasan atau kata sandi tidak sesuai.'
             : error.message
         );
         return;
@@ -98,90 +110,202 @@ export default function LoginPage() {
       router.push('/dashboard');
       router.refresh();
     } catch {
-      setErrorMsg('Terjadi kesalahan jaringan. Silakan coba lagi.');
+      setErrorMsg('Terjadi kendala jaringan saat menghubungi server. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-slate-900">
-      {/* Background Image Gedung dengan Blur & Overlay Gradien */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/gedung.png"
-          alt="Gedung PPSDMPU"
-          fill
-          priority
-          className="object-cover object-center scale-105 filter blur-sm opacity-40 dark:opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-slate-900/60" />
-      </div>
+    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 dark:bg-slate-950">
+      {/* ============================================================== */}
+      {/* PANEL KIRI: HERO BRANDING RESMI KEDINASAN (Desktop >= lg)      */}
+      {/* ============================================================== */}
+      <section className="hidden lg:flex lg:w-1/2 xl:w-7/12 relative flex-col justify-between p-12 xl:p-16 overflow-hidden bg-slate-950 text-white">
+        {/* Foto Gedung Background dengan Gradient Overlay Lembut */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/gedung.png"
+            alt="Gedung Pusat Pengembangan SDM Perhubungan Udara"
+            fill
+            priority
+            className="object-cover object-center scale-105 filter blur-xs opacity-35 dark:opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-indigo-950/80 to-slate-950/90" />
+          {/* Subtle Grid Accent */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)',
+              backgroundSize: '32px 32px',
+            }}
+          />
+        </div>
 
-      {/* Theme Toggle di Pojok Kanan Atas */}
-      <div className="absolute top-5 right-5 z-20">
-        <ThemeToggle showLabel className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-md" />
-      </div>
+        {/* Top: Logo & Nama Kementerian */}
+        <div className="relative z-10">
+          <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-md">
+              <div className="w-10 h-10 relative flex items-center justify-center p-0.5 rounded-xl bg-white">
+                <Image
+                  src="/logo-kemenhub.png"
+                  alt="Logo Kemenhub"
+                  width={34}
+                  height={34}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="w-10 h-10 relative flex items-center justify-center p-0.5 rounded-xl bg-white">
+                <Image
+                  src="/logo-ppsdmpu.png"
+                  alt="Logo PPSDMPU"
+                  width={34}
+                  height={34}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
 
-      {/* Card Kontainer Utama */}
-      <div className="w-full max-w-md relative z-10 my-8">
-        {/* Header Logo Kemenhub & PPSDMPU */}
-        <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-14 h-14 relative p-1 rounded-2xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-lg border border-white/20 flex items-center justify-center">
+            <div className="border-l border-white/20 pl-3.5">
+              <p className="text-[11px] font-bold tracking-wider uppercase text-slate-200">
+                Kementerian Perhubungan RI
+              </p>
+              <p className="text-[12px] font-medium text-slate-400">
+                Badan Pengembangan SDM Perhubungan
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Center: Headline & Keunggulan Sistem */}
+        <div className="relative z-10 max-w-xl my-auto py-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold mb-5 shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Sistem Informasi Capaian Kinerja Antara (IKA)
+          </div>
+
+          <h1 className="text-3xl xl:text-4xl font-extrabold tracking-tight text-white leading-tight mb-4">
+            Pengukuran & Monitoring Kinerja Antara PPSDMPU
+          </h1>
+
+          <p className="text-sm xl:text-base text-slate-300 leading-relaxed mb-8">
+            Platform digital terintegrasi untuk pelaporan, normalisasi data, dan kalkulasi otomatis 6 Indikator Kinerja Antara (IKA) bagi 8 UPT Pendidikan & Pelatihan Perhubungan Udara.
+          </p>
+
+          {/* 3 Value Highlights */}
+          <div className="space-y-3.5">
+            <div className="flex items-start gap-3.5 p-3 rounded-xl bg-white/5 backdrop-blur-xs border border-white/10">
+              <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0 mt-0.5">
+                <Layers className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Hierarki Pohon Indikator Dinamis</h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  Mendukung kedalaman bertingkat (SKA → IKA → Komponen → Sub → Leaf Node) sesuai standar Renstra 2025–2029.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5 p-3 rounded-xl bg-white/5 backdrop-blur-xs border border-white/10">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
+                <Building2 className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Integrasi 8 Satker Kampus & Balai</h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  PPI Curug, Poltekbang Surabaya, Medan, Makassar, Palembang, Jayapura, API Banyuwangi, dan BP3 Curug.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5 p-3 rounded-xl bg-white/5 backdrop-blur-xs border border-white/10">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0 mt-0.5">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-white">Kalkulasi Otomatis & Akuntabel</h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  Snapshot hasil hitung otomatis saat submit dengan formula terverifikasi, meminimalisir deviasi manual.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom: Hak Cipta & Info PPSDMPU */}
+        <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+          <p>© 2026 Pusat Pengembangan SDM Perhubungan Udara</p>
+          <span className="font-mono text-[10px] text-slate-400">Versi 1.0</span>
+        </div>
+      </section>
+
+      {/* ============================================================== */}
+      {/* PANEL KANAN: FORMULIR AUTENTIKASI PENGGUNA                     */}
+      {/* ============================================================== */}
+      <section className="w-full lg:w-1/2 xl:w-5/12 flex flex-col justify-between p-6 sm:p-10 lg:p-12 xl:p-16 relative bg-white dark:bg-slate-900 border-l border-slate-200/80 dark:border-slate-800">
+        {/* Top Bar Form Panel */}
+        <div className="flex items-center justify-between pb-6">
+          {/* Logo Mobile Only */}
+          <div className="flex items-center gap-2.5 lg:hidden">
+            <div className="w-9 h-9 relative flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
               <Image
                 src="/logo-kemenhub.png"
-                alt="Logo Kementerian Perhubungan"
-                width={46}
-                height={46}
+                alt="Logo Kemenhub"
+                width={30}
+                height={30}
                 className="object-contain"
-                priority
               />
             </div>
-            <div className="w-14 h-14 relative p-1 rounded-2xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-lg border border-white/20 flex items-center justify-center">
+            <div className="w-9 h-9 relative flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
               <Image
                 src="/logo-ppsdmpu.png"
                 alt="Logo PPSDMPU"
-                width={46}
-                height={46}
+                width={30}
+                height={30}
                 className="object-contain"
-                priority
               />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">IKA PPSDMPU</p>
+              <p className="text-[10px] text-slate-500">Portal Kinerja Antara</p>
             </div>
           </div>
 
-          <h1 className="text-2xl font-extrabold tracking-tight text-white drop-shadow-md">
-            Sistem Informasi IKA
-          </h1>
-          <p className="text-xs text-slate-300 font-medium mt-1 drop-shadow-xs max-w-xs mx-auto">
-            Pusat Pengembangan SDM Perhubungan Udara (PPSDMPU)
-          </p>
-        </div>
-
-        {/* Card Form Glassmorphism */}
-        <div className="p-7 md:p-8 rounded-3xl bg-white/90 dark:bg-slate-900/85 backdrop-blur-xl border border-white/40 dark:border-slate-800 shadow-2xl shadow-black/40">
-          <div className="flex items-center justify-between mb-5">
-            <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">
-                Masuk ke Akun Anda
-              </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Gunakan kredensial resmi kedinasan
-              </p>
-            </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-              PORTAL IKA
+          <div className="hidden lg:flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60">
+              <ShieldCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              Sistem Kinerja Antara
             </span>
           </div>
 
+          {/* Theme Toggle */}
+          <ThemeToggle showLabel className="shadow-2xs" />
+        </div>
+
+        {/* Center: Card Formulir */}
+        <div className="w-full max-w-sm sm:max-w-md mx-auto my-auto py-6">
+          <div className="mb-6 text-left">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Masuk ke Akun Anda
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              Gunakan alamat email resmi kedinasan untuk mengakses portal.
+            </p>
+          </div>
+
+          {/* Alert Error */}
           {errorMsg && (
-            <div className="mb-5 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2.5 animate-in fade-in">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-500" />
+            <div className="mb-5 p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-xs flex items-start gap-2.5 animate-in fade-in">
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-500 mt-0.5" />
               <span>{errorMsg}</span>
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
+            {/* Input Email */}
             <div>
               <label
                 htmlFor="email"
@@ -189,17 +313,23 @@ export default function LoginPage() {
               >
                 Alamat Email Kedinasan
               </label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin.upt@ppsdmpu.go.id"
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-              />
+              <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin.upt@ppsdmpu.go.id"
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                />
+              </div>
             </div>
 
+            {/* Input Password */}
             <div>
               <label
                 htmlFor="password"
@@ -208,6 +338,9 @@ export default function LoginPage() {
                 Kata Sandi
               </label>
               <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  <Lock className="w-4 h-4" />
+                </div>
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -215,23 +348,20 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-3.5 pr-10 py-2.5 rounded-xl text-sm bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-10 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer"
                   aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
+            {/* Select Sesi Periode */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label
@@ -240,53 +370,69 @@ export default function LoginPage() {
                 >
                   Sesi Periode Pelaporan
                 </label>
-                <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800/60">
-                  {periodeList.find((p) => `${p.tahun}-Q${p.triwulan}` === selectedPeriode)?.status === 'BUKA'
-                    ? 'Triwulan Terbuka'
-                    : 'Triwulan Tertutup'}
+                <span
+                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${
+                    activePeriodeData?.status === 'BUKA'
+                      ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800'
+                      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  {activePeriodeData?.status === 'BUKA' ? 'Triwulan Terbuka' : 'Triwulan Ditutup'}
                 </span>
               </div>
-              <select
-                id="periode"
-                value={selectedPeriode}
-                onChange={(e) => setSelectedPeriode(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50/90 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-medium transition-all"
-              >
-                {periodeList.map((p) => (
-                  <option key={p.id} value={`${p.tahun}-Q${p.triwulan}`}>
-                    Tahun {p.tahun} - Triwulan {p.triwulan} ({p.status})
-                  </option>
-                ))}
-              </select>
-              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
-                Default otomatis triwulan aktif ({periodeList.find((p) => p.status === 'BUKA') ? `TW ${periodeList.find((p) => p.status === 'BUKA')?.triwulan} ${periodeList.find((p) => p.status === 'BUKA')?.tahun}` : 'saat ini'}). Anda tetap bisa memilih triwulan yang sudah ditutup.
+              <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  <Calendar className="w-4 h-4" />
+                </div>
+                <select
+                  id="periode"
+                  value={selectedPeriode}
+                  onChange={(e) => setSelectedPeriode(e.target.value)}
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-medium transition-all cursor-pointer"
+                >
+                  {periodeList.map((p) => (
+                    <option key={p.id} value={`${p.tahun}-Q${p.triwulan}`}>
+                      Tahun {p.tahun} — Triwulan {p.triwulan} ({p.status})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1.5">
+                Default otomatis ke triwulan aktif saat ini. Anda tetap dapat memilih triwulan yang telah lalu untuk melihat arsip data.
               </p>
             </div>
 
+            {/* Tombol Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-2.5 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-md shadow-indigo-600/30 cursor-pointer"
+              className="w-full mt-2 py-3 px-4 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-md shadow-indigo-600/25 cursor-pointer"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
                   <LogIn className="w-4 h-4" />
-                  <span>Masuk</span>
+                  <span>Masuk ke Sistem</span>
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/70 text-center">
-            <p className="text-[11px] text-slate-400 dark:text-slate-500">
-              Akses terbatas untuk Admin 8 UPT, Super Admin Pusat, dan Pimpinan PPSDMPU.
-            </p>
+          {/* Footer Card */}
+          <div className="mt-8 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+            <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+              <ShieldCheck className="w-4 h-4 text-slate-400 shrink-0" />
+              <span>Akses resmi untuk Admin 8 UPT, Admin Pusat, Super Admin, dan Pimpinan.</span>
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* Bottom Help Desk */}
+        <div className="text-center pt-4 text-[11px] text-slate-400 dark:text-slate-500">
+          Mengalami kendala akun? Silakan hubungi Administrator Sistem PPSDMPU.
+        </div>
+      </section>
     </div>
   );
 }
-
