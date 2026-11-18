@@ -20,34 +20,53 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedPeriode, setSelectedPeriode] = useState('2026-Q2');
+  // Helper penentu triwulan kalender saat ini
+  // Bulan 1-3 = TW 1, 4-6 = TW 2, 7-9 = TW 3, 10-12 = TW 4
+  const now = new Date();
+  const currentCalendarYear = now.getFullYear();
+  const currentCalendarQuarter = Math.floor(now.getMonth() / 3) + 1;
+  const currentCalendarKey = `${currentCalendarYear}-Q${currentCalendarQuarter}`;
+
+  const [selectedPeriode, setSelectedPeriode] = useState(currentCalendarKey);
   const [periodeList, setPeriodeList] = useState<PeriodeItem[]>([
-    { id: '1', tahun: 2026, triwulan: 2, status: 'BUKA' },
-    { id: '2', tahun: 2026, triwulan: 1, status: 'TUTUP' },
+    { id: '4', tahun: 2026, triwulan: 4, status: 'BUKA' },
     { id: '3', tahun: 2026, triwulan: 3, status: 'TUTUP' },
-    { id: '4', tahun: 2026, triwulan: 4, status: 'TUTUP' },
+    { id: '2', tahun: 2026, triwulan: 2, status: 'TUTUP' },
+    { id: '1', tahun: 2026, triwulan: 1, status: 'TUTUP' },
   ]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Ambil daftar periode dari database secara real-time dan pasang default ke triwulan yang BUKA
+  // Ambil daftar periode dari database secara real-time
+  // Prioritas default:
+  // 1. Triwulan kalender saat ini jika ada di daftar periode
+  // 2. Jika tidak ada, triwulan yang berstatus BUKA oleh Pusat
+  // 3. Jika tidak ada, triwulan terbaru di database
   useEffect(() => {
     async function loadPeriodes() {
       const res = await getDaftarPeriodeAction();
       if (res.success && res.data.length > 0) {
         setPeriodeList(res.data as PeriodeItem[]);
-        // Cari periode yang statusnya BUKA
-        const periodeBuka = res.data.find((p) => p.status === 'BUKA');
-        if (periodeBuka) {
-          setSelectedPeriode(`${periodeBuka.tahun}-Q${periodeBuka.triwulan}`);
+
+        const calendarMatch = res.data.find(
+          (p) => `${p.tahun}-Q${p.triwulan}` === currentCalendarKey
+        );
+
+        if (calendarMatch) {
+          setSelectedPeriode(currentCalendarKey);
         } else {
-          const first = res.data[0];
-          setSelectedPeriode(`${first.tahun}-Q${first.triwulan}`);
+          const periodeBuka = res.data.find((p) => p.status === 'BUKA');
+          if (periodeBuka) {
+            setSelectedPeriode(`${periodeBuka.tahun}-Q${periodeBuka.triwulan}`);
+          } else {
+            const latest = res.data[0];
+            setSelectedPeriode(`${latest.tahun}-Q${latest.triwulan}`);
+          }
         }
       }
     }
     loadPeriodes();
-  }, []);
+  }, [currentCalendarKey]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
