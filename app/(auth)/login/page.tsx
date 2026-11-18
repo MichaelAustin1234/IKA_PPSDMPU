@@ -223,8 +223,8 @@ export default function LoginPage() {
                 </label>
                 <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800/60">
                   {periodeList.find((p) => `${p.tahun}-Q${p.triwulan}` === selectedPeriode)?.status === 'BUKA'
-                    ? 'Kuartal Terbuka'
-                    : 'Kuartal Tertutup'}
+                    ? 'Triwulan Terbuka'
+                    : 'Triwulan Tertutup'}
                 </span>
               </div>
               <select
@@ -240,7 +240,7 @@ export default function LoginPage() {
                 ))}
               </select>
               <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
-                Default otomatis kuartal aktif ({periodeList.find((p) => p.status === 'BUKA') ? `Q${periodeList.find((p) => p.status === 'BUKA')?.triwulan} ${periodeList.find((p) => p.status === 'BUKA')?.tahun}` : 'saat ini'}). Anda tetap bisa memilih triwulan yang sudah ditutup.
+                Default otomatis triwulan aktif ({periodeList.find((p) => p.status === 'BUKA') ? `TW ${periodeList.find((p) => p.status === 'BUKA')?.triwulan} ${periodeList.find((p) => p.status === 'BUKA')?.tahun}` : 'saat ini'}). Anda tetap bisa memilih triwulan yang sudah ditutup.
               </p>
             </div>
 
