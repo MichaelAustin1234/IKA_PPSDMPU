@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
 import { UserManagerView, type AdminUserItem } from '@/components/ika/UserManagerView';
-import type { UserRole } from '@/lib/types';
+import type { UserRole, Upt } from '@/lib/types';
 
 export default async function UsersPage() {
   const supabase = await createClient();
@@ -26,14 +26,16 @@ export default async function UsersPage() {
 
   const adminClient = createAdminClient();
 
-  // Ambil daftar auth users dan profiles
-  const [{ data: authUsersRes }, { data: profilesData }] = await Promise.all([
+  // Ambil daftar auth users, profiles, dan master UPT
+  const [{ data: authUsersRes }, { data: profilesData }, { data: uptData }] = await Promise.all([
     adminClient.auth.admin.listUsers(),
     adminClient.from('profiles').select('*, upt:upt_id(*)'),
+    adminClient.from('upt').select('*').order('kode'),
   ]);
 
   const authUsers = authUsersRes?.users || [];
   const profileMap = new Map((profilesData || []).map((p) => [p.id, p]));
+  const uptList: Upt[] = (uptData as Upt[]) || [];
 
   const usersList: AdminUserItem[] = authUsers.map((u) => {
     const prof = profileMap.get(u.id);
@@ -42,6 +44,7 @@ export default async function UsersPage() {
       email: u.email || '-',
       nama: prof?.nama || u.email?.split('@')[0] || 'Pengguna',
       role: (prof?.role as UserRole) || 'PIMPINAN',
+      uptId: prof?.upt_id || null,
       uptNama: prof?.upt?.nama,
       uptKode: prof?.upt?.kode,
       lastSignInAt: u.last_sign_in_at,
@@ -64,5 +67,5 @@ export default async function UsersPage() {
     return a.nama.localeCompare(b.nama);
   });
 
-  return <UserManagerView users={usersList} />;
+  return <UserManagerView users={usersList} uptList={uptList} currentUserId={user.id} />;
 }
