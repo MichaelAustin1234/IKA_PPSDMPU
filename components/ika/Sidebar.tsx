@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -94,15 +95,27 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
     <aside className="w-64 h-full flex flex-col justify-between bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
       {/* Top Header / Branding */}
       <div>
-        <div className="h-16 flex items-center gap-3 px-5 border-b border-slate-100 dark:border-slate-800/60">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-base shadow-sm shadow-indigo-500/20">
-            IKA
+        <div className="h-16 flex items-center gap-3 px-4 border-b border-slate-100 dark:border-slate-800/60">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-8 h-8 relative p-0.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-center shrink-0 shadow-2xs">
+              <Image
+                src="/logo-ppsdmpu.png"
+                alt="Logo PPSDMPU"
+                width={26}
+                height={26}
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-black text-xs tracking-wider shadow-xs shadow-indigo-500/20 shrink-0">
+              IKA
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">
+          <div className="flex flex-col min-w-0">
+            <span className="font-bold text-xs tracking-tight text-slate-900 dark:text-white truncate">
               PPSDMPU
             </span>
-            <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 truncate">
               Sistem Kinerja Antara
             </span>
           </div>

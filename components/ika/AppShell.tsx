@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { Sidebar } from './Sidebar';
 import { ThemeToggle } from './ThemeToggle';
@@ -86,7 +87,18 @@ export function AppShell({ profile, activePeriode = '2026-Q2', children }: AppSh
             >
               <Menu className="w-5 h-5" />
             </button>
-            <span className="font-bold text-sm text-slate-900 dark:text-white">IKA PPSDMPU</span>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 relative flex items-center justify-center shrink-0">
+                <Image
+                  src="/logo-ppsdmpu.png"
+                  alt="Logo PPSDMPU"
+                  width={22}
+                  height={22}
+                  className="object-contain"
+                />
+              </div>
+              <span className="font-bold text-sm text-slate-900 dark:text-white">IKA PPSDMPU</span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
