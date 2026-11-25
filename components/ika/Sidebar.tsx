@@ -14,6 +14,7 @@ import {
   UserCheck,
   Users,
   CalendarClock,
+  History,
 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { createClient } from '@/lib/supabase/client';
@@ -71,6 +72,12 @@ export function Sidebar({ profile, activePeriode = '2026-Q2', onCloseMobile }: S
       label: 'Pengaturan Periode',
       href: '/periode',
       icon: CalendarClock,
+      roles: ['SUPER_ADMIN'],
+    },
+    {
+      label: 'Audit Trail',
+      href: '/audit-log',
+      icon: History,
       roles: ['SUPER_ADMIN'],
     },
     {

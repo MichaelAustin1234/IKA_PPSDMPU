@@ -90,3 +90,26 @@ export interface HasilHitung {
   dihitung_pada?: string;
   node?: IndikatorNode;
 }
+
+export type AuditAction =
+  | 'SUBMIT_LAPORAN'
+  | 'APPROVE_LAPORAN'
+  | 'REJECT_LAPORAN'
+  | 'BUKA_PERIODE'
+  | 'TUTUP_PERIODE'
+  | 'CREATE_PERIODE'
+  | 'RESET_PASSWORD';
+
+export interface AuditLog {
+  id: string;
+  user_id: string | null;
+  user_email: string;
+  user_nama: string;
+  role: UserRole;
+  action: AuditAction | string;
+  target_type: string | null;
+  target_id: string | null;
+  keterangan: string;
+  detail: Record<string, unknown> | null;
+  created_at: string;
+}

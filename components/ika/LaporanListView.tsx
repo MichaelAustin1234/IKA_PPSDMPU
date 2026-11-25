@@ -3,7 +3,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { CheckCircle2, XCircle, Clock, FileText, Check, X, ShieldAlert, Eye, Calendar } from 'lucide-react';
+import { reviewLaporanAction } from '@/app/actions/laporan';
+import {
+  CheckCircle2,
+  XCircle,
+  Clock,
+  FileText,
+  Check,
+  X,
+  ShieldAlert,
+  Eye,
+  Calendar,
+  AlertTriangle,
+  MessageSquare,
+} from 'lucide-react';
 import type { Laporan, Profile, Periode } from '@/lib/types';
 
 interface LaporanListViewProps {
@@ -50,23 +63,32 @@ export function LaporanListView({
   const [reviewItems, setReviewItems] = useState<LaporanIsiDetail[]>([]);
   const [loadingItems, setLoadingItems] = useState<boolean>(false);
 
+  // Modal Reject & Catatan Revisi State
+  const [rejectModalLaporan, setRejectModalLaporan] = useState<Laporan | null>(null);
+  const [rejectCatatan, setRejectCatatan] = useState<string>('');
+
   const canReview =
     currentProfile.role === 'ADMIN_PUSAT' || currentProfile.role === 'SUPER_ADMIN';
 
-  const handleReview = async (laporanId: string, status: 'APPROVED' | 'REJECTED') => {
+  const handleReview = async (
+    laporanId: string,
+    status: 'APPROVED' | 'REJECTED',
+    catatan?: string
+  ) => {
     setActionLoading(laporanId);
     try {
-      const supabase = createClient();
-      await supabase
-        .from('laporan')
-        .update({
-          status,
-          reviewed_by: currentProfile.id,
-        })
-        .eq('id', laporanId);
+      const res = await reviewLaporanAction(laporanId, status, catatan);
+      if (!res.success) {
+        alert(res.error || 'Gagal memperbarui status laporan');
+        return;
+      }
 
       if (reviewModalLaporan?.id === laporanId) {
         setReviewModalLaporan(null);
+      }
+      if (rejectModalLaporan?.id === laporanId) {
+        setRejectModalLaporan(null);
+        setRejectCatatan('');
       }
       router.refresh();
     } catch (err) {
@@ -198,7 +220,17 @@ export function LaporanListView({
                           })
                         : '-'}
                     </td>
-                    <td className="py-3.5 px-4 text-center">{getStatusBadge(l.status)}</td>
+                    <td className="py-3.5 px-4 text-center">
+                      {getStatusBadge(l.status)}
+                      {l.status === 'REJECTED' && l.catatan && (
+                        <div className="mt-1.5 flex items-start justify-center gap-1 text-[11px] text-rose-600 dark:text-rose-400 font-medium max-w-xs mx-auto text-left">
+                          <MessageSquare className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                          <span className="line-clamp-2" title={l.catatan}>
+                            {l.catatan}
+                          </span>
+                        </div>
+                      )}
+                    </td>
                     <td className="py-3.5 px-4 text-right">
                       <button
                         onClick={() => openReviewModal(l)}
@@ -222,7 +254,10 @@ export function LaporanListView({
                               <span>Setujui</span>
                             </button>
                             <button
-                              onClick={() => handleReview(l.id, 'REJECTED')}
+                              onClick={() => {
+                                setRejectModalLaporan(l);
+                                setRejectCatatan('');
+                              }}
                               disabled={actionLoading === l.id}
                               className="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-medium text-[11px] flex items-center gap-1 transition-colors disabled:opacity-50"
                               title="Tolak Laporan"
@@ -317,7 +352,11 @@ export function LaporanListView({
               {canReview && reviewModalLaporan.status === 'SUBMITTED' && (
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => handleReview(reviewModalLaporan.id, 'REJECTED')}
+                    onClick={() => {
+                      setRejectModalLaporan(reviewModalLaporan);
+                      setRejectCatatan('');
+                      setReviewModalLaporan(null);
+                    }}
                     disabled={actionLoading === reviewModalLaporan.id}
                     className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold flex items-center gap-1 disabled:opacity-50"
                   >
@@ -335,6 +374,75 @@ export function LaporanListView({
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Tolak & Catatan Revisi */}
+      {rejectModalLaporan && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-rose-100 dark:bg-rose-950/80 flex items-center justify-center text-rose-600 dark:text-rose-400">
+                  <AlertTriangle className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    Tolak Laporan & Minta Revisi
+                  </h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    {rejectModalLaporan.upt?.nama || 'UPT'}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setRejectModalLaporan(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleReview(rejectModalLaporan.id, 'REJECTED', rejectCatatan);
+              }}
+              className="p-5 space-y-4"
+            >
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  Catatan Revisi untuk Admin UPT <span className="text-rose-500">*</span>
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={rejectCatatan}
+                  onChange={(e) => setRejectCatatan(e.target.value)}
+                  placeholder="Contoh: Jumlah sertifikasi kompetensi pada IKA.01 belum melampirkan berkas bukti dukung. Harap periksa dan submit kembali."
+                  className="w-full p-3 text-xs rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-hidden focus:ring-2 focus:ring-rose-500 text-slate-900 dark:text-white placeholder:text-slate-400 resize-none"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setRejectModalLaporan(null)}
+                  className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  disabled={actionLoading === rejectModalLaporan.id}
+                  className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold disabled:opacity-50 transition-colors flex items-center gap-1.5"
+                >
+                  <X className="w-3.5 h-3.5" />
+                  <span>Kirim Penolakan & Catatan</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
